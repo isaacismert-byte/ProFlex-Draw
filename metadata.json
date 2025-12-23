@@ -1,0 +1,5 @@
+{
+  "name": "ProFlex Draw",
+  "description": "A progressive web app for high-fidelity graphical design of gas piping systems, featuring BTU calculation and validation.",
+  "requestFramePermissions": []
+}

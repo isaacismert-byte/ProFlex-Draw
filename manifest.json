@@ -1,0 +1,18 @@
+
+{
+  "name": "ProFlex Draw",
+  "short_name": "ProFlex",
+  "description": "Professional Gas Piping Designer",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/9355/9355644.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
