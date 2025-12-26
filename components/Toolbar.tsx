@@ -9,6 +9,8 @@ interface ToolbarProps {
   setSelectedTool: (tool: 'pipe' | 'select') => void;
   selectedPipeSize: PipeSize;
   setSelectedPipeSize: (size: PipeSize) => void;
+  templates: any[];
+  onLoadTemplate: (template: any) => void;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({ 
@@ -16,7 +18,9 @@ const Toolbar: React.FC<ToolbarProps> = ({
   selectedTool, 
   setSelectedTool,
   selectedPipeSize,
-  setSelectedPipeSize
+  setSelectedPipeSize,
+  templates,
+  onLoadTemplate
 }) => {
   return (
     <div className="absolute top-4 left-4 bottom-4 flex flex-col gap-3 z-10 w-64 overflow-y-auto pr-2 no-scrollbar pb-12">
@@ -81,7 +85,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-3 border border-slate-200 mb-6">
+      <div className="bg-white rounded-xl shadow-lg p-3 border border-slate-200">
         <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Current Pipe Tool Size</h3>
         <div className="grid grid-cols-1 gap-1">
           {Object.values(PipeSize).map((size) => (
@@ -94,6 +98,31 @@ const Toolbar: React.FC<ToolbarProps> = ({
               <span className={`text-[8px] font-mono ${selectedPipeSize === size ? 'text-indigo-200' : 'text-slate-400'}`}>
                 {PIPE_SPECS[size].capacity.toLocaleString()} BTU
               </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-lg p-3 border border-slate-200 mb-6">
+        <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">My Templates</h3>
+        <div className="flex flex-col gap-1.5">
+          {templates.map((template, idx) => (
+            <button
+              key={idx}
+              onClick={() => template && onLoadTemplate(template)}
+              disabled={!template}
+              className={`w-full py-2 px-3 rounded-lg border text-left flex flex-col transition-all ${template ? 'bg-slate-50 border-slate-200 hover:bg-indigo-50 hover:border-indigo-300' : 'bg-slate-50/50 border-dashed border-slate-200 opacity-50 cursor-not-allowed'}`}
+            >
+              <div className="flex justify-between items-center w-full">
+                <span className={`text-[10px] font-bold ${template ? 'text-slate-800' : 'text-slate-400 italic'}`}>
+                  {template ? template.name : `Slot ${idx + 1}: Empty`}
+                </span>
+                {template && (
+                  <span className="text-[8px] text-slate-400 font-mono">
+                    {new Date(template.timestamp).toLocaleDateString()}
+                  </span>
+                )}
+              </div>
             </button>
           ))}
         </div>
