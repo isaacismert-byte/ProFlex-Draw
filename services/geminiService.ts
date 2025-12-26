@@ -4,10 +4,9 @@ import { AppNode, AppEdge } from "../types";
 
 /**
  * Audits the gas system using Gemini AI to identify safety or efficiency concerns.
- * Uses gemini-3-flash-preview for general text-based reasoning tasks.
+ * Strictly limited to 2 sections with 5 bullet points each.
  */
 export async function auditSystem(nodes: AppNode[], edges: AppEdge[]) {
-  // Initialize the AI client inside the function to ensure the latest API key from process.env is used.
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   const prompt = `
@@ -17,12 +16,12 @@ export async function auditSystem(nodes: AppNode[], edges: AppEdge[]) {
     
     STRUCTURE YOUR RESPONSE EXACTLY AS FOLLOWS:
     1. Provide EXACTLY TWO sections.
-    2. Section 1 should be titled "Safety & Compliance Audit".
-    3. Section 2 should be titled "Optimization & Performance".
+    2. Section 1 title: "SAFETY & COMPLIANCE"
+    3. Section 2 title: "PERFORMANCE & OPTIMIZATION"
     4. Provide EXACTLY 5 concise bullet points per section.
-    5. Do not include any intro or outro text.
+    5. Use plain text or markdown bullets (-). No intro, no outro, no additional headers.
     
-    Base your audit on NFPA 54 / IFGC standards and common gas plumbing best practices.
+    Base your audit on NFPA 54 / IFGC standards.
   `;
 
   try {
@@ -30,13 +29,13 @@ export async function auditSystem(nodes: AppNode[], edges: AppEdge[]) {
       model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
-        temperature: 0.4, // Lower temperature for more consistent structural adherence
+        temperature: 0.3,
       }
     });
     
     return response.text;
   } catch (error) {
     console.error("Gemini Audit Error:", error);
-    return "Failed to perform AI audit. Please check your connections and try again.";
+    return "Audit currently unavailable. Please verify your internet connection.";
   }
 }
