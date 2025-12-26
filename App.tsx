@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { AppNode, AppEdge, NodeType, PipeSize } from './types';
-import { PIPE_SPECS, COLORS, DEFAULT_APPLIANCES } from './constants';
-import Toolbar from './components/Toolbar';
-import Canvas from './components/Canvas';
-import { auditSystem } from './services/geminiService';
+import { AppNode, AppEdge, NodeType, PipeSize } from './types.ts';
+import { PIPE_SPECS, COLORS, DEFAULT_APPLIANCES } from './constants.ts';
+import Toolbar from './components/Toolbar.tsx';
+import Canvas from './components/Canvas.tsx';
+import { auditSystem } from './services/geminiService.ts';
 
 const RECENTS_KEY = 'proflex_draw_recents_v2';
 

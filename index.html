@@ -14,6 +14,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    // Global environment mock to prevent "process is not defined" errors on static hosts
+    window.process = { env: { API_KEY: "" } };
+    
     tailwind.config = {
       theme: {
         extend: {
@@ -57,10 +60,12 @@
   }
 }
 </script>
+  <!-- Babel Standalone allows the browser to transpile TSX on the fly -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
-  <!-- Automatically import the entry point index.tsx -->
-  <script type="module" src="./index.tsx"></script>
+  <!-- Use data-type="module" with Babel to treat index.tsx as an ES module -->
+  <script type="text/babel" data-type="module" data-presets="react,typescript" src="./index.tsx"></script>
 </body>
 </html>

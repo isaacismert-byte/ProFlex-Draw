@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { AppNode, AppEdge } from "../types";
+import { AppNode, AppEdge } from "../types.ts";
 
 /**
  * Audits the gas system using Gemini AI.
